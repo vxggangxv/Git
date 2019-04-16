@@ -29,6 +29,9 @@ git commit -a -m 'comment'
 // git 가져오기
 git clone branch_name
 
+// git 원격 최초 푸시
+git remote add origin [복사 https]
+
 // git push하기
 git push
 
