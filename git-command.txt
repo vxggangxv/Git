@@ -1,0 +1,173 @@
+﻿Git 명령어
+
+[주요 명령어]
+// git설치후 최초 사용자 정보 설정
+// git 계정Name 변경하기
+git config — global user.name “user_name”
+
+// git 계정Mail변경하기
+git config  — global user.email “user_email” 
+
+// git 생성
+git init
+
+// git 상태 확인
+git status
+
+// git 수정한 코드 선택 (git add *, git add .)
+git add file_name
+
+// git tracked 상태 untracked 상태로 되돌리기
+git rm file_name
+
+// git 선택한 코드 설명 적기
+git commit -m 'comment'
+
+// git 코드 선택, 커밋, 설명 한번에 하기
+git commit -a -m 'comment'
+
+// git 가져오기
+git clone branch_name
+
+// git push하기
+git push
+
+// git서버에서 최신 코드 받아와 merge하기
+git pull
+
+// git 서버에서 최신 코드 받아오기
+git fetch
+
+// git 브랜치선택 후 merge하기
+git merge branch_name
+
+// 원격 브런치 선택
+git checkout branch_name
+
+// 브런치 생성
+git checkout -b branch_name
+
+// 브런치 생성 후 remote branch 생성
+git push origin branch_name
+
+// remote branch 생성 후 branch 연동
+git branch --set-upstream-to origin/branch_name (git pull no tracking info 에러해결)
+
+// 사용하지 않는 branch로 이동 후 제거
+git checkout other_branch_name
+git branch -d branch_name
+// commit한 이력이 남아있는 경우 강제 삭제
+git branch -D branch_name
+
+// local처럼 remote branch 삭제
+git push origin :branch_name
+
+// 원격 브랜치 삭제하기 ( git push origin  — delete gh-pages )
+git push origin — delete branch_name 
+
+[실제 master push 적용 방법]
+// master로 checkout 후 pull로 데이터 가져오기, 작업한 test를 머지 한 후 로컬에서 확인 후에 remote master 로 push 
+// test브랜치 작업후
+git checkout master
+git pull origin master
+git merge test
+git push origin master
+
+[git tag 사용법]
+// git tag 명령으로 이미 만들어진 태그 확인
+git tag
+
+// 검색패턴을 사용하여 태그 검색
+$ git tag -l 'v1.4.2.*'
+
+// 태그 붙이기 : git의 태그 종류 Lightweight, Annotated 
+// Annotated 태그는 Git 데이터베이스에 태그를 만든 사람의 이름, 이메일과 태그를 만든 날짜, 그리고 태그 메시지도 저장
+// Lightweight 태그는 다른 정보를 저장하지 않는 단순한 태그가 필요
+
+// Annotated 태그 만드는 방법, tag 명령 실행시 -a 옵션 추가
+git tag -a v1.4 -m 'my version 1.4'
+
+// Lightweight 태그 만드는 방법, -a, -s, -m 옵션을 사용하지 않는다.
+git tag v1.4-lw
+
+// 나중에 태그하기
+// git log 검색 후 체크섬을 사용하여 (7자리)
+git log --pretty=oneline
+git tag -a v1.2 -m 'version 1.2' 9fceb02
+
+// 태그 공유하기, 기본적으로 서버에 태그를 전송하지 않는다. 태그를 만들었으면 서버에 별도로 push 해야한다.
+git push origin [태그 이름]
+// 만약 한번에 여러 개 push 하고 싶으면 --tags 옵션을 추가
+git push origin --tags
+
+
+[기타 명령어]
+// 커밋 히스토리 조회하기 (-p는 각 커밋의 diff결과, -2는 최근 두 개의 결과)
+git log -p -2
+
+// 현재 staged된 수정사항 확인
+git diff --cached 또는 git diff --staged
+
+// 현재 unstaged된 수정사항 확인
+git diff
+
+// 로컬의 branch 간 비교
+git diff branch_name other_branch_name
+
+// 로컬과 리모트의 내용 비교
+git diff branch_name origin/branch_name
+
+// 마지막 커밋과 그 이전 커밋 비교
+git diff HEAD HEAD^
+
+// 마지막 커밋과 현재 수정사항 확인
+git diff HEAD
+
+// commit한 이전 코드 취소하기
+git reset --hard HEAD^
+
+// commit한 코드는 살리고 커밋만 취소하기 
+// ^: 바로전 ^^^ 3번전
+// --soft: commit 내용이 stage로 옮겨진다
+git reset --soft HEAD^
+
+// commit에 추가내역을 넣고 싶을 떄
+// --amend: 가장 최신의 commit에 내용 추가하기
+git commit --amend -m 'something'
+
+// merge 취소하기
+git reset --merge
+
+// git 코드 강제로 모두 받아오기
+git reset — hard HEAD && git pull
+
+// 특정 원하는 commit 하나만 삭제하고 싶을 떄
+// --revert
+git revert [Commit ID]
+
+// 원격 브랜치 목록보기
+git branch -r
+
+// 전체 브랜치 목록보기
+git branch -a
+
+// 브랜치 이름 바꾸기
+git branch -m branch_name change_branch_name
+
+// 브랜치 마지막 커밋 메시지 보기
+git branch -v
+
+// 브랜치 merge 와 no merge 구분해서 보기
+git branch --merged
+git branch --no-merged
+
+// 작업코드 임시저장하고 브랜치 바꾸기
+git stash / git stash save “description” 
+
+// 마지막으로 임시저장한 작업코드 가져오기
+git stash pop
+
+// git ignore파일 캐시 삭제
+git rm -r --cached
+git add .
+git commit -m 'Fixed cached'
