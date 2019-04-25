@@ -8,6 +8,9 @@ git config — global user.name “user_name”
 // git 계정Mail변경하기
 git config  — global user.email “user_email” 
 
+// git 확인
+git config --list
+
 // git 생성
 git init
 
