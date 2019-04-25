@@ -11,6 +11,13 @@ git config  — global user.email “user_email”
 // git 확인
 git config --list
 
+// cache를 사용하여 매번 git 아이디, 패스워드 입력 안하는 방법
+git config credential.helper store
+Username for ""
+Password for ""
+// 만료 시간을 입력하려면 (1day - 86400 / 7days - 604,800 / 30days - 2592000 / 2시간 - 7200)
+git config --global credential.helper 'cache --timeout 7200'
+
 // git 생성
 git init
 
