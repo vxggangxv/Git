@@ -45,6 +45,9 @@ git remote add origin [복사 https]
 // git origin URL 변경하기
 git remote set-url origin URL
 
+// remote 제거
+git remote remove remote_name
+
 // git push하기
 git push
 
@@ -53,6 +56,20 @@ git pull
 
 // git 서버에서 최신 코드 받아오기
 git fetch
+
+// 로컬에 있는 내용을 무시하고 git에서 내려 받기
+git fetch --all
+git reset --hard origin/mastser
+
+// 특정 branch에서 내려받기
+git fetch --all
+git reset --hard origin/branch_name
+
+// 작업중인 내용을 branch로 만들고 내려받기
+git checkout master
+git branch branch_name
+git fetch -all
+git reset --hard origin/master
 
 // git 브랜치선택 후 merge하기
 git merge branch_name
@@ -66,8 +83,8 @@ git checkout -b branch_name
 // 브런치 생성 후 remote branch 생성
 git push origin branch_name
 
-// remote branch 생성 후 branch 연동
-git branch --set-upstream-to origin/branch_name (git pull no tracking info 에러해결)
+// remote branch 생성 후 branch 연동 (git push -u )
+git push --set-upstream-to origin/branch_name (git pull no tracking info 에러해결)
 
 // 사용하지 않는 branch로 이동 후 제거
 git checkout other_branch_name
