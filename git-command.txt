@@ -18,6 +18,14 @@ Password for ""
 // 만료 시간을 입력하려면 (1day - 86400 / 7days - 604,800 / 30days - 2592000 / 2시간 - 7200)
 git config --global credential.helper 'cache --timeout 7200'
 
+// lf will be replaced by CRLF 오류 해결법
+// window 사용자
+git config --global core.autocrlf true
+// linux, Max 사용자
+git config --global core.autocrlf true input
+// 메시지 자체 끄는법 
+git config --global core.autocrlf false
+
 // git 생성
 git init
 
